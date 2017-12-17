@@ -1,0 +1,15 @@
+- name: Extract installed parsoid to /opt/parsoid
+  become: true
+  unarchive:
+    src: ./libs/parsoid-20171217-installed.tgz
+    dest: /opt
+    group: www-data
+    owner: www-data
+
+- name: Copy config.yaml.jinja2 to /opt/parsoid/config.yaml
+  become: true
+  template:
+    src: ./templates/config.yaml.jinja2
+    dest: /opt/parsoid/config.yaml
+    group: www-data
+    owner: www-data

@@ -28,7 +28,7 @@ $wgSitename = "{{ wgSitename }}";
 $wgScriptPath = "";
 
 ## The protocol and server name to use in fully-qualified URLs
-$wgServer = "http://{{ wikihost }}:{{ wikiport }}";
+$wgServer = "http://{{ wikihost }}{{ wikiport }}";
 
 ## The URL path to static resources (images, scripts, etc.)
 $wgResourceBasePath = $wgScriptPath;
@@ -149,7 +149,36 @@ wfLoadExtension( 'SyntaxHighlight_GeSHi' );
 wfLoadExtension( 'TitleBlacklist' );
 wfLoadExtension( 'VisualEditor' );
 
-
 # End of automatically generated settings.
 # Add more configuration options below.
+
+// Enable VisualEditor by default for everybody
+$wgDefaultUserOptions['visualeditor-enable'] = 1;
+
+// Enable VisualEditor's experimental code features
+#$wgDefaultUserOptions['visualeditor-enable-experimental'] = 1;
+
+$wgVirtualRestConfig['modules']['parsoid'] = array(
+  // URL to the Parsoid instance
+  'url' => 'http://{{ parsoidhost }}:{{ parsoidport }}',
+  // Parsoid "domain", see below (optional)
+  'domain' => '{{ wikihost }}',
+  // Parsoid "prefix", see below (optional)
+  'prefix' => '{{ wikihost }}'
+);
+
+// Forwaarding cookies to Parsoid
+// This feature requires a non-locking session store. The default session store will not work and
+// will cause deadlocks (connection timeouts from Parsoid) when trying to use this feature.
+$wgSessionsInObjectCache = true;
+
+// Forward users' Cookie: headers to Parsoid. Required for private wikis (login required to read).
+// If the wiki is not private (i.e. $wgGroupPermissions['*']['read'] is true) this configuration
+// variable will be ignored.
+//
+// WARNING: ONLY enable this on private wikis and ONLY IF you understand the SECURITY IMPLICATIONS
+// of sending Cookie headers to Parsoid over HTTP. For security reasons, it is strongly recommended
+// that $wgVirtualRestConfig['modules']['parsoid']['url'] be pointed to localhost if this setting is enabled.
+$wgVirtualRestConfig['modules']['parsoid']['forwardCookies'] = true;
+
 

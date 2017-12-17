@@ -16,8 +16,14 @@
     wgSitename: "AnsibleWiki"
 
     #These two are used to build wgServer
+    #port, if not empty, should include the preceeding colon/:
     wikihost: "localhost"
-    wikiport: "8080"
+    wikiport: ":8080" 
+
+    #Parsoid configuration
+    parsoidhost: "localhost"
+    #does not include the preceeding colon/: 
+    parsoidport: "8000"
 
   # gather_facts: False
   tasks:
