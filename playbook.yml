@@ -1,6 +1,8 @@
 - hosts: "all"
   vars:
-    mysql_root_password: fart
+    mysql_root_password: unsercure
+    mw_admin_user: wikiuser
+    mw_admin_password: wikipassword
   # gather_facts: False
   tasks:
     - include_tasks: tasks/prepare_server.yml
