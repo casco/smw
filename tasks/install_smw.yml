@@ -1,0 +1,41 @@
+- name: Extract mediawiki /var/www
+  become: true
+  unarchive:
+    src: ./libs/mediawiki-1.30.0.tar.gz
+    dest: /var/www
+
+- name: Extract VisualEditor to /var/www/mediawiki-1.30.0/extensions
+  become: true
+  unarchive:
+    src: ./libs/VisualEditor-REL1_30-61f161a.tar.gz
+    dest: /var/www/mediawiki-1.30.0/extensions
+
+- name: Copy LocalSettings.php (will be a template)
+  become: true
+  copy:
+    src: ./templates/LocalSettings.php
+    dest: /var/www/mediawiki-1.30.0/
+
+- name: Remove old html
+  become: true
+  file: 
+   path: /var/www/html 
+   state: absent
+
+- name: Rename wiki as html
+  become: true
+  command: mv /var/www/mediawiki-1.30.0 /var/www/html
+
+- name: Change owner of html
+  become: true
+  file: 
+   path: /var/www/html 
+   owner: www-data
+   group: www-data
+   recurse: true
+
+- name: restart apache2 
+  become: true
+  service: 
+    name=apache2 
+    state=restarted

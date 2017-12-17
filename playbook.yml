@@ -1,0 +1,7 @@
+- hosts: "all"
+  vars:
+    mysql_root_password: fart
+  # gather_facts: False
+  tasks:
+    - include_tasks: tasks/prepare_server.yml
+    - include_tasks: tasks/install_smw.yml

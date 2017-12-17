@@ -1,0 +1,48 @@
+- name: Instalando paquetes basicos
+  become: true
+  apt:
+    name="{{ item }}"
+    update_cache=yes
+    state=present
+    force=yes
+  with_items:
+    - apache2
+    - libapache2-mod-php
+    - php
+    - php-cgi
+    - php-sqlite3
+    - php-cli
+    - php-pear
+    - php-imagick
+    - php-gd
+    - php-mysqlnd
+    - php-json
+    - php-ldap
+    - php-curl
+    - php-intl
+    - php-mcrypt
+    - php-mbstring
+    - php-xml
+    - mysql-server
+    - python-mysqldb
+- name: Start the MySQL service
+  become: true
+  service: 
+    name: mysql 
+    state: started
+    enabled: true
+- name: update mysql root password for all root accounts
+  become: true
+  mysql_user: 
+    name: root 
+    host: "{{ item }}" 
+    password: "{{ mysql_root_password }}"
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    check_implicit_admin: yes
+    priv: "*.*:ALL,GRANT"
+  with_items:
+      - "{{ ansible_hostname }}"
+      - 127.0.0.1
+      - ::1
+      - localhost 
