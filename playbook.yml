@@ -1,8 +1,23 @@
 - hosts: "all"
   vars:
-    mysql_root_password: unsercure
-    mw_admin_user: wikiuser
-    mw_admin_password: wikipassword
+    mysql_root_password: "unsecure"
+
+    wgDBserver: "localhost"
+    wgDBname: "my_wiki"
+    wgDBuser: "wikidbuser"
+    wgDBpassword: "wikidbpass"
+
+    ##Name and password for the admin user of the wiki
+    ## !! Do not change these
+    mw_admin_user: "wikiuser"
+    mw_admin_password: "wikipassword"
+    
+    wgSitename: "AnsibleWiki"
+
+    #These two are used to build wgServer
+    wikihost: "localhost"
+    wikiport: "8080"
+
   # gather_facts: False
   tasks:
     - include_tasks: tasks/prepare_server.yml

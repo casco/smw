@@ -10,11 +10,11 @@
     src: ./libs/VisualEditor-REL1_30-61f161a.tar.gz
     dest: /var/www/mediawiki-1.30.0/extensions
 
-- name: Copy LocalSettings.php (will be a template)
+- name: Copy LocalSettings.php.jinja2 to LocalSettings.php
   become: true
-  copy:
-    src: ./templates/LocalSettings.php
-    dest: /var/www/mediawiki-1.30.0/
+  template:
+    src: ./templates/LocalSettings.php.jinja2
+    dest: /var/www/mediawiki-1.30.0/LocalSettings.php
 
 - name: Remove old html
   become: true
@@ -33,6 +33,35 @@
    owner: www-data
    group: www-data
    recurse: true
+
+- name: Copy database dump file
+  copy:
+    src: ./data/my_wiki.sql
+    dest: /tmp   
+
+- name: create database for wiki using the dump
+  mysql_db: 
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    name: "{{ wgDBname }}"
+    state: import
+    target: /tmp/my_wiki.sql
+
+- name: create mysql user for wikidb
+  mysql_user: 
+    name: "{{ wgDBuser }}" 
+    host: "{{ item }}"
+    password: "{{ wgDBpassword }}"
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    priv: "{{ wgDBname }}.*:ALL,GRANT"
+    state: present
+  with_items:
+      - "{{ ansible_hostname }}"
+      - "{{ wikihost }}"
+      - 127.0.0.1
+      - ::1
+      - localhost 
 
 - name: restart apache2 
   become: true

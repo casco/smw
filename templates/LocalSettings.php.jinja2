@@ -18,7 +18,7 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 ## Uncomment this to disable output compression
 # $wgDisableOutputCompression = true;
 
-$wgSitename = "MyWikiName";
+$wgSitename = "{{ wgSitename }}";
 
 ## The URL base path to the directory containing the wiki;
 ## defaults for all runtime URL paths are based off of this.
@@ -28,7 +28,7 @@ $wgSitename = "MyWikiName";
 $wgScriptPath = "";
 
 ## The protocol and server name to use in fully-qualified URLs
-$wgServer = "http://localhost:8080";
+$wgServer = "http://{{ wikihost }}:{{ wikiport }}";
 
 ## The URL path to static resources (images, scripts, etc.)
 $wgResourceBasePath = $wgScriptPath;
@@ -51,10 +51,10 @@ $wgEmailAuthentication = true;
 
 ## Database settings
 $wgDBtype = "mysql";
-$wgDBserver = "localhost";
-$wgDBname = "my_wiki";
-$wgDBuser = "root";
-$wgDBpassword = "fart";
+$wgDBserver = "{{ wgDBserver }}";
+$wgDBname = "{{ wgDBname }}";
+$wgDBuser = "{{ wgDBuser }}";
+$wgDBpassword = "{{ wgDBpassword }}";
 
 # MySQL specific settings
 $wgDBprefix = "";
