@@ -46,3 +46,23 @@
       - 127.0.0.1
       - ::1
       - localhost 
+
+#install nodejs
+
+- name: Add nodesource keys
+  become: true
+  apt_key: url="https://deb.nodesource.com/gpgkey/nodesource.gpg.key" state=present
+
+- name: Retrieve nodesource setup file
+  get_url: 
+    url: https://deb.nodesource.com/setup_8.x
+    dest: /tmp/setup_8.x
+    mode: u+x
+
+- name: Run repo instalation script
+  become: true
+  command: /tmp/setup_8.x
+
+- name: Install nodejs!
+  become: true
+  apt: pkg=nodejs state=latest update_cache=true

@@ -1,5 +1,6 @@
 - hosts: "all"
   vars:
+   
     mysql_root_password: "unsecure"
 
     wgDBserver: "localhost"
@@ -21,4 +22,5 @@
   # gather_facts: False
   tasks:
     - include_tasks: tasks/prepare_server.yml
+    - include_tasks: tasks/install_parsoid.yml
     - include_tasks: tasks/install_smw.yml
