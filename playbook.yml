@@ -13,12 +13,12 @@
     mw_admin_user: "wikiuser"
     mw_admin_password: "wikipassword"
     
-    wgSitename: "AnsibleWiki"
+    wgSitename: "RUC-APS Wiki"
 
     #These two are used to build wgServer
     #port, if not empty, should include the preceeding colon/:
     wikihost: "localhost"
-    wikiport: ":8080" 
+    wikiport: "" 
 
     #Parsoid configuration
     parsoidhost: "localhost"
