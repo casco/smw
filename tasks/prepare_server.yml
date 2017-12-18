@@ -25,6 +25,9 @@
     - php-xml
     - mysql-server
     - python-mysqldb
+    - zip
+    - unzip
+    - php7.0-zip
 - name: Start the MySQL service
   become: true
   service: 
