@@ -69,3 +69,7 @@
 - name: Install nodejs!
   become: true
   apt: pkg=nodejs state=latest update_cache=true
+
+- name: Install PM2 globaly
+  become: true
+  command: npm install -g pm2  
