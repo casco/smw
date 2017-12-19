@@ -17,11 +17,11 @@
 
     #These two are used to build wgServer
     #port, if not empty, should include the preceeding colon/:
-    wikihost: "localhost"
+    wikihost: "rucaps-wp10-test.lifia.info.unlp.edu.ar"
     wikiport: "" 
 
     #Parsoid configuration
-    parsoidhost: "localhost"
+    parsoidhost: "rucaps-wp10-test.lifia.info.unlp.edu.ar"
     #does not include the preceeding colon/: 
     parsoidport: "8000"
 

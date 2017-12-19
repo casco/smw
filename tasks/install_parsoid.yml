@@ -1,15 +1,45 @@
-- name: Extract installed parsoid to /opt/parsoid
+#install parsoid
+- name: Add parsoid keys
+  become: true
+  apt_key:
+   keyserver: keys.gnupg.net
+   id: 90E9F83F22250DD7
+   
+- name: Agregando repositorios de parsoid
+  become: true
+  apt_repository:
+    repo: "deb https://releases.wikimedia.org/debian jessie-mediawiki main"
+    state: present
+    filename: "parsoid" 
+    
+- name: Instalando parsoid
+  become: true
+  apt:
+    name="{{ item }}"
+    update_cache=yes
+    state=present
+    force=yes
+  with_items:
+    - parsoid
+    
+- name: Extract installed parsoid to /usr/lib/parsoid
   become: true
   unarchive:
     src: ./libs/parsoid-20171217-installed.tgz
-    dest: /opt
+    dest: /usr/lib
     group: www-data
     owner: www-data
 
-- name: Copy config.yaml.jinja2 to /opt/parsoid/config.yaml
+- name: Copy config.yaml.jinja2 to /etc/mediawiki/parsoid/config.yaml
   become: true
   template:
     src: ./templates/config.yaml.jinja2
-    dest: /opt/parsoid/config.yaml
+    dest: /etc/mediawiki/parsoid/config.yaml
     group: www-data
     owner: www-data
+    
+- name: restart parsoid 
+  become: true
+  service: 
+    name: parsoid 
+    state: restarted
