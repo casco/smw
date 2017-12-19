@@ -13,18 +13,18 @@
     mw_admin_user: "wikiuser"
     mw_admin_password: "wikipassword"
     
-    wgSitename: "RUC-APS Wiki"
+    wgSitename: "Ansible Wiki"
 
     #These two are used to build wgServer
     #port, if not empty, should include the preceeding colon/:
-    wikihost: "rucaps-wp10-test.lifia.info.unlp.edu.ar"
+    wikihost: "localhost"
     wikiport: "" 
 
     #Parsoid configuration
     #where to install / copy the parsoid server
     parsoidLocation: "/opt"
     #host
-    parsoidhost: "rucaps-wp10-test.lifia.info.unlp.edu.ar"
+    parsoidhost: "localhost"
     #port does not include the preceeding colon/: 
     parsoidport: "8000"
 
