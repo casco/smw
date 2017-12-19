@@ -21,8 +21,11 @@
     wikiport: "" 
 
     #Parsoid configuration
+    #where to install / copy the parsoid server
+    parsoidLocation: "/opt"
+    #host
     parsoidhost: "rucaps-wp10-test.lifia.info.unlp.edu.ar"
-    #does not include the preceeding colon/: 
+    #port does not include the preceeding colon/: 
     parsoidport: "8000"
 
   # gather_facts: False
