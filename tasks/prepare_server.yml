@@ -29,6 +29,23 @@
     - unzip
     - php7.0-zip
     - screen
+
+- name: update mysql root password for all root accounts
+  become: true
+  mysql_user: 
+    name: root 
+    host: "{{ item }}" 
+    password: "{{ mysql_root_password }}"
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    check_implicit_admin: yes
+    priv: "*.*:ALL,GRANT"
+  with_items:
+      - "{{ ansible_hostname }}"
+      - 127.0.0.1
+      - ::1
+      - localhost 
+          
 - name: Start the MySQL service
   become: true
   service: 
