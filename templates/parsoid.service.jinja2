@@ -1,0 +1,14 @@
+[Unit]
+Description=Parsoid service
+
+[Service]
+Restart=on-failure
+ExecStart=/usr/bin/node {{ parsoidLocation }}/parsoid/bin/server.js
+WorkingDirectory={{ parsoidLocation }}/parsoid
+
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=parsoid
+
+[Install]
+WantedBy=multi-user.target
