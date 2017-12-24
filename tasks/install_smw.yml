@@ -30,6 +30,19 @@
   become: true
   file: 
    path: /var/www/html 
+   owner: jmartin
+   group: jmartin
+   recurse: true
+
+- composer:
+    command: update
+    working_dir: /var/www/html
+
+
+- name: Change owner of html
+  become: true
+  file: 
+   path: /var/www/html 
    owner: www-data
    group: www-data
    recurse: true

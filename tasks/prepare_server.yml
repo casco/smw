@@ -29,6 +29,7 @@
     - unzip
     - php7.0-zip
     - screen
+    - composer
 
 - name: update mysql root password for all root accounts
   become: true
