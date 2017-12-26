@@ -188,7 +188,10 @@ enableSemantics( '{{ wikihost }}' );
 wfLoadExtension( 'PageForms' );
 // Semantic Internal Objects
 include_once("$IP/extensions/SemanticInternalObjects/SemanticInternalObjects.php");
+//Embed Video
+wfLoadExtension( 'EmbedVideo' );
 
+//SemanticExtraSpecialProperties configuration
 $GLOBALS['sespSpecialProperties'] = array(
 	'_EUSER',
 	'_CUSER',
