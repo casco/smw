@@ -188,3 +188,17 @@ enableSemantics( '{{ wikihost }}' );
 wfLoadExtension( 'PageForms' );
 // Semantic Internal Objects
 include_once("$IP/extensions/SemanticInternalObjects/SemanticInternalObjects.php");
+
+$GLOBALS['sespSpecialProperties'] = array(
+	'_EUSER',
+	'_CUSER',
+	'_REVID',
+	'_PAGEID',
+	'_PAGELGTH',
+	'_NREV',
+	'_NTREV',
+	'_SUBP',
+	'_USERREG',
+	'_USEREDITCNT',
+	'_EXIFDATA'
+);
